@@ -4,14 +4,14 @@
 #
 Name     : perl-HTML-Lint
 Version  : 2.32
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/HTML-Lint-2.32.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/HTML-Lint-2.32.tar.gz
 Summary  : 'check for HTML errors in a string or file'
 Group    : Development/Tools
 License  : Artistic-2.0
-Requires: perl-HTML-Lint-bin
-Requires: perl-HTML-Lint-man
+Requires: perl-HTML-Lint-bin = %{version}-%{release}
+BuildRequires : buildreq-cpan
 BuildRequires : perl(HTML::Entities)
 BuildRequires : perl(HTML::Parser)
 BuildRequires : perl(HTML::Tagset)
@@ -24,18 +24,19 @@ BuildRequires : perl(HTML::Tagset)
 %package bin
 Summary: bin components for the perl-HTML-Lint package.
 Group: Binaries
-Requires: perl-HTML-Lint-man
 
 %description bin
 bin components for the perl-HTML-Lint package.
 
 
-%package man
-Summary: man components for the perl-HTML-Lint package.
-Group: Default
+%package dev
+Summary: dev components for the perl-HTML-Lint package.
+Group: Development
+Requires: perl-HTML-Lint-bin = %{version}-%{release}
+Provides: perl-HTML-Lint-devel = %{version}-%{release}
 
-%description man
-man components for the perl-HTML-Lint package.
+%description dev
+dev components for the perl-HTML-Lint package.
 
 
 %prep
@@ -64,9 +65,9 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -75,17 +76,17 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/HTML/Lint.pm
-/usr/lib/perl5/site_perl/5.26.1/HTML/Lint/Error.pm
-/usr/lib/perl5/site_perl/5.26.1/HTML/Lint/HTML4.pm
-/usr/lib/perl5/site_perl/5.26.1/HTML/Lint/Parser.pm
-/usr/lib/perl5/site_perl/5.26.1/Test/HTML/Lint.pm
+/usr/lib/perl5/vendor_perl/5.26.1/HTML/Lint.pm
+/usr/lib/perl5/vendor_perl/5.26.1/HTML/Lint/Error.pm
+/usr/lib/perl5/vendor_perl/5.26.1/HTML/Lint/HTML4.pm
+/usr/lib/perl5/vendor_perl/5.26.1/HTML/Lint/Parser.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Test/HTML/Lint.pm
 
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/weblint
 
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/HTML::Lint.3
 /usr/share/man/man3/HTML::Lint::Error.3
