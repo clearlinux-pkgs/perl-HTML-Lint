@@ -4,13 +4,14 @@
 #
 Name     : perl-HTML-Lint
 Version  : 2.32
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/HTML-Lint-2.32.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/HTML-Lint-2.32.tar.gz
 Summary  : 'check for HTML errors in a string or file'
 Group    : Development/Tools
 License  : Artistic-2.0
 Requires: perl-HTML-Lint-bin = %{version}-%{release}
+Requires: perl-HTML-Lint-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(HTML::Entities)
 BuildRequires : perl(HTML::Parser)
@@ -34,19 +35,30 @@ Summary: dev components for the perl-HTML-Lint package.
 Group: Development
 Requires: perl-HTML-Lint-bin = %{version}-%{release}
 Provides: perl-HTML-Lint-devel = %{version}-%{release}
+Requires: perl-HTML-Lint = %{version}-%{release}
 
 %description dev
 dev components for the perl-HTML-Lint package.
 
 
+%package perl
+Summary: perl components for the perl-HTML-Lint package.
+Group: Default
+Requires: perl-HTML-Lint = %{version}-%{release}
+
+%description perl
+perl components for the perl-HTML-Lint package.
+
+
 %prep
 %setup -q -n HTML-Lint-2.32
+cd %{_builddir}/HTML-Lint-2.32
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -56,7 +68,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -76,11 +88,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/HTML/Lint.pm
-/usr/lib/perl5/vendor_perl/5.28.2/HTML/Lint/Error.pm
-/usr/lib/perl5/vendor_perl/5.28.2/HTML/Lint/HTML4.pm
-/usr/lib/perl5/vendor_perl/5.28.2/HTML/Lint/Parser.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Test/HTML/Lint.pm
 
 %files bin
 %defattr(-,root,root,-)
@@ -93,3 +100,11 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 /usr/share/man/man3/HTML::Lint::HTML4.3
 /usr/share/man/man3/HTML::Lint::Parser.3
 /usr/share/man/man3/Test::HTML::Lint.3
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/HTML/Lint.pm
+/usr/lib/perl5/vendor_perl/5.30.1/HTML/Lint/Error.pm
+/usr/lib/perl5/vendor_perl/5.30.1/HTML/Lint/HTML4.pm
+/usr/lib/perl5/vendor_perl/5.30.1/HTML/Lint/Parser.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Test/HTML/Lint.pm
