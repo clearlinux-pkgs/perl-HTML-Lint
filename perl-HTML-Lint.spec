@@ -103,8 +103,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.32.1/HTML/Lint.pm
-/usr/lib/perl5/vendor_perl/5.32.1/HTML/Lint/Error.pm
-/usr/lib/perl5/vendor_perl/5.32.1/HTML/Lint/HTML4.pm
-/usr/lib/perl5/vendor_perl/5.32.1/HTML/Lint/Parser.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Test/HTML/Lint.pm
+/usr/lib/perl5/vendor_perl/5.34.0/HTML/Lint.pm
+/usr/lib/perl5/vendor_perl/5.34.0/HTML/Lint/Error.pm
+/usr/lib/perl5/vendor_perl/5.34.0/HTML/Lint/HTML4.pm
+/usr/lib/perl5/vendor_perl/5.34.0/HTML/Lint/Parser.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Test/HTML/Lint.pm
