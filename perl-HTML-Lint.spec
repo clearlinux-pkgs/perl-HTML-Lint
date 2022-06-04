@@ -4,7 +4,7 @@
 #
 Name     : perl-HTML-Lint
 Version  : 2.32
-Release  : 22
+Release  : 23
 URL      : https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/HTML-Lint-2.32.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/HTML-Lint-2.32.tar.gz
 Summary  : 'check for HTML errors in a string or file'
@@ -103,8 +103,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/HTML/Lint.pm
-/usr/lib/perl5/vendor_perl/5.34.0/HTML/Lint/Error.pm
-/usr/lib/perl5/vendor_perl/5.34.0/HTML/Lint/HTML4.pm
-/usr/lib/perl5/vendor_perl/5.34.0/HTML/Lint/Parser.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Test/HTML/Lint.pm
+/usr/lib/perl5/*
