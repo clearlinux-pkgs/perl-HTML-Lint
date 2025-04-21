@@ -7,7 +7,7 @@
 #
 Name     : perl-HTML-Lint
 Version  : 2.32
-Release  : 34
+Release  : 35
 URL      : https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/HTML-Lint-2.32.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/HTML-Lint-2.32.tar.gz
 Summary  : 'check for HTML errors in a string or file'
